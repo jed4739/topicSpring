@@ -1,15 +1,13 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Spring Security Example</title>
+</head>
 <body>
-<div class="container">
-    <div>
-        <h1>Hello Spring</h1>
-        <p>회원 기능</p>
-        <p>
-            <a href="/members/new">회원 가입</a>
-            <a href="/members">회원 목록</a>
-        </p>
-    </div>
-</div> <!-- /container -->
+<h1>Welcome!</h1>
+<p>Click <a th:href="@{/user}">User</a> page</p>
+<p>Click <a th:href="@{/admin}">Admin</a> page</p>
+<p>Click <a th:href="@{/logout}">Logout</a></p>
 </body>
 </html>
