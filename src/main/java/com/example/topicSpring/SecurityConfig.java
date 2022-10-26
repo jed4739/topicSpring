@@ -29,7 +29,7 @@ public class SecurityConfig {
                     .password(password)
                     .roles("ADMIN")
                     .build());
-            log.debug(manager.toString());
+            log.info(manager.toString());
             return manager;
         }
 

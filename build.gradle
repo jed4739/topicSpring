@@ -32,10 +32,7 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-	implementation group: 'nz.net.ultraq.thymeleaf', name: 'thymeleaf-layout-dialect', version: '3.1.0'
-
-	// bootstrap
-	implementation group: 'org.webjars', name: 'bootstrap', version: '5.1.3'
+	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
 
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 }

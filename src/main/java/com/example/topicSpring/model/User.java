@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Getter @Setter
 @Entity
 @Table(name = "author")
-public class Member {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,9 +40,7 @@ public class Member {
     @Column(name = "created")
     private String created;
 
+
     private String role;
 
-    public void updateName(String name) {
-        this.name = name;
-    }
 }
