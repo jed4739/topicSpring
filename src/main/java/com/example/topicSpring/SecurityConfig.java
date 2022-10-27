@@ -19,7 +19,6 @@ public class SecurityConfig {
         @Bean
         public InMemoryUserDetailsManager userDetailsService() {
             String password = passwordEncoder().encode("1111");
-            log.debug(password);
             InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
             manager.createUser(User.withUsername("user")
                     .password(password)
@@ -29,7 +28,6 @@ public class SecurityConfig {
                     .password(password)
                     .roles("ADMIN")
                     .build());
-            log.info(manager.toString());
             return manager;
         }
 
