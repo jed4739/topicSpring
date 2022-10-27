@@ -27,9 +27,6 @@ public class User {
     @Column(length = 15, name = "name")
     private String name;
 
-    @Column(length = 20, name = "phone")
-    private String phone;
-
     @Column(name = "created")
     private String created;
 
@@ -37,13 +34,12 @@ public class User {
     private String role;
 
     @Builder
-    public User(Long id, String userid,String mail, String user_password, String name, String phone, String created, String role) {
+    public User(Long id, String userid,String mail, String user_password, String name, String created, String role) {
         this.id = id;
         this.userid = userid;
         this.mail = mail;
         this.user_password = user_password;
         this.name = name;
-        this.phone = phone;
         this.created = created;
         this.role = role;
 

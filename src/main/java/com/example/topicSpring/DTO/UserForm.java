@@ -15,7 +15,6 @@ public class UserForm {
     private String mail;
     private String user_password;
     private String name;
-    private String phone;
     private String created;
     private String role;
 
@@ -27,7 +26,6 @@ public class UserForm {
                 .mail(mail)
                 .user_password(new BCryptPasswordEncoder().encode(user_password))
                 .name(name)
-                .phone(phone)
                 .created(created)
                 .role(role)
                 .build();
