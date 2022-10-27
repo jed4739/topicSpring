@@ -10,22 +10,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class homeController {
     @GetMapping("/")
     public String home(Model model){
-        log.info("Get : home controller");
-        return "index";
+        log.info("Get : home");
+        return "/index";
     }
     @GetMapping("/user")
-    public String displayUser(Model model){
-        log.info("home controller");
+    public String User(Model model){
+        log.info("Get : User page");
         return "/user/user";
     }
-    @GetMapping("/manager")
-    public String displayManager(Model model){
-        log.info("home controller");
-        return "/user/manager";
-    }
     @GetMapping("/admin")
-    public String displayAdmin(Model model){
-        log.info("home controller");
+    public String Admin(Model model){
+        log.info("Get : Admin page");
         return "/user/admin";
     }
 }

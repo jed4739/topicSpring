@@ -1,14 +1,10 @@
 package com.example.topicSpring.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter @Setter
 @Entity
 @Table(name = "author")
@@ -17,7 +13,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Long id;
 
     @Column(length = 100, name = "userid", unique = true)
     private String userid;
@@ -25,14 +21,11 @@ public class User {
     @Column(length = 100, name = "mail", unique = true)
     private String mail;
 
-    @Column(length = 100, name = "userPassword")
-    private String userPassword;
+    @Column(length = 100, name = "user_password")
+    private String user_password;
 
     @Column(length = 15, name = "name")
     private String name;
-
-    @Column(length = 100, name = "profile")
-    private String profile;
 
     @Column(length = 20, name = "phone")
     private String phone;
@@ -40,7 +33,21 @@ public class User {
     @Column(name = "created")
     private String created;
 
-
+    @Column(name = "role")
     private String role;
 
+    @Builder
+    public User(Long id, String userid,String mail, String user_password, String name, String phone, String created, String role) {
+        this.id = id;
+        this.userid = userid;
+        this.mail = mail;
+        this.user_password = user_password;
+        this.name = name;
+        this.phone = phone;
+        this.created = created;
+        this.role = role;
+
+    }
+
 }
+
