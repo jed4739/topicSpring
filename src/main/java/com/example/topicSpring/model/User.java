@@ -7,7 +7,6 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter @Setter
 @Entity
 @Table(name = "author")
@@ -18,13 +17,13 @@ public class User {
     @Column(name = "id")
     private Integer id;
 
-    @Column(length = 100, name = "userid", unique = true)
+    @Column(length = 100, name = "username", unique = true)
     private String userid;
 
     @Column(length = 100, name = "mail", unique = true)
     private String mail;
 
-    @Column(length = 100, name = "user_password")
+    @Column(length = 100, name = "password")
     private String user_password;
 
     @Column(length = 15, name = "name")
