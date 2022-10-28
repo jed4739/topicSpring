@@ -14,7 +14,7 @@ public class UserService {
     private final UserRepository userRepository;
 
     @Transactional
-    public Long createUser(UserForm form) {
+    public Integer createUser(UserForm form) {
         User user = form.toEntity();
         userRepository.save(user);
         return user.getId();

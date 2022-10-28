@@ -1,10 +1,13 @@
 package com.example.topicSpring.model;
 
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter @Setter
 @Entity
 @Table(name = "author")
@@ -13,7 +16,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private Integer id;
 
     @Column(length = 100, name = "userid", unique = true)
     private String userid;
@@ -34,7 +37,7 @@ public class User {
     private String role;
 
     @Builder
-    public User(Long id, String userid,String mail, String user_password, String name, String created, String role) {
+    public User(Integer id, String userid,String mail, String user_password, String name, String created, String role) {
         this.id = id;
         this.userid = userid;
         this.mail = mail;
@@ -45,5 +48,7 @@ public class User {
 
     }
 
+    public User(String userid, String user_password, Collection<? extends GrantedAuthority> authorities) {
+    }
 }
 
