@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,8 +20,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @AllArgsConstructor
 public class SecurityConfig {
-
-    /** 권한 설정 */
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {
         String password = passwordEncoder().encode("1234");
@@ -36,31 +35,30 @@ public class SecurityConfig {
         return manager;
     }
 
-    /** img,css,js security setting */
+    /** resources security setting */
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
+        return (web) -> web.ignoring().antMatchers("/resources/**");
     }
 
-    /** Service 에서 비밀번호를 암호화할 수 있도록 Bean 으로 등록 */
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    /** url roles 접근 제한 */
+    /** Security Filter */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
+        http.httpBasic().disable() // 로그인 따로 만듦
+                .csrf().disable() // csrf 보안 끔
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // JWT 인증으로 대체
+                .and()
                 .authorizeRequests()
-                .antMatchers("/","/register").permitAll()
-                .antMatchers("/user").hasRole("USER")
-                .antMatchers("/admin").hasRole("ADMIN")
-                .anyRequest().authenticated()
+                .antMatchers("/*/signUp","/*/signIn").permitAll() // 로그인 회원가입은 접근가능
+                .anyRequest().hasRole("USER") // 그 외는 유저만 접근 가능
                 .and()
                 .formLogin();
         return http.build();
     }
 
-
+    /** Password Encryption */
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 }
