@@ -1,6 +1,10 @@
 package com.example.topicSpring.model;
 
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
@@ -24,30 +28,28 @@ public class User {
     private String mail;
 
     @Column(length = 100, name = "password")
-    private String user_password;
+    private String password;
 
     @Column(length = 15, name = "name")
     private String name;
 
     @Column(name = "created")
+    @CreatedDate
     private String created;
 
     @Column(name = "role")
     private String role;
 
     @Builder
-    public User(Integer id, String userid,String mail, String user_password, String name, String created, String role) {
+    public User(Integer id, String userid,String mail, String password, String name, String role) {
         this.id = id;
         this.userid = userid;
         this.mail = mail;
-        this.user_password = user_password;
+        this.password = password;
         this.name = name;
-        this.created = created;
         this.role = role;
 
     }
 
-    public User(String userid, String user_password, Collection<? extends GrantedAuthority> authorities) {
-    }
 }
 
