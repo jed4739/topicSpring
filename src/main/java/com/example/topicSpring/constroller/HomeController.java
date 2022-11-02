@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/sign")
 public class HomeController {
-
     @GetMapping("/up")
     public String SignUp(){
         return "dd";
