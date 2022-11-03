@@ -1,4 +1,4 @@
-package com.example.topicSpring;
+package com.example.topicSpring.config;
 
 
 import lombok.AllArgsConstructor;
