@@ -14,6 +14,19 @@ public class BoardRepositoryTest {
     @Autowired
     BordRepository bordRepository;
 
+    /*
+    * data size test
+    *
+    * */
+    @Test
+    public void DataSizeTest() {
+        List<Board> DataAll = this.bordRepository.findAll();
+        Assertions.assertEquals(2, DataAll.size());
+
+        Board B = DataAll.get(0);
+        Assertions.assertEquals("질문!", B.getTitle());
+    }
+
     /** board data insert test */
     @Test
     public void JpaTest() {
@@ -28,13 +41,4 @@ public class BoardRepositoryTest {
         this.bordRepository.save(board2);
     }
 
-    /** data size test */
-    @Test
-    public void DataSizeTest() {
-        List<Board> DataAll = this.bordRepository.findAll();
-        Assertions.assertEquals(2, DataAll.size());
-
-        Board B = DataAll.get(0);
-        Assertions.assertEquals("질문!", B.getTitle());
-    }
 }

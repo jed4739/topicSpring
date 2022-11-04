@@ -15,10 +15,10 @@ public class Board extends BaseTime {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(length = 200)
+    @Column(nullable = false, length = 200)
     private String title;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
 
     @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
