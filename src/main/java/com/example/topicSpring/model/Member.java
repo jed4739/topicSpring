@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Getter @Setter
 @Entity
 @Table(name = "member")
-public class Member extends BaseTime {
+public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
