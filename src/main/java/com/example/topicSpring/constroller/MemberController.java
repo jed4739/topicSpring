@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Slf4j
 @Controller
@@ -67,5 +68,11 @@ public class MemberController {
     public String login() {
         log.info("로그인 페이지 접근!");
         return "login/login_form";
+    }
+
+    @GetMapping("/mypage")
+    public String mypage(Principal principal) {
+        log.info("마이 페이지");
+        return "my_page";
     }
 }
