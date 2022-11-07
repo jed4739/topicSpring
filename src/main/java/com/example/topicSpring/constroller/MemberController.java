@@ -3,8 +3,9 @@ package com.example.topicSpring.constroller;
 import com.example.topicSpring.model.MemberCreateForm;
 import com.example.topicSpring.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/user")
@@ -32,14 +34,38 @@ public class MemberController {
         }
 
         if (!memberCreateForm.getPassword_1().equals(memberCreateForm.getPassword_2())) {
-            bindingResult.rejectValue("password_2", "passwordInCorrect",
-                    "2개의 패스워드가 일치하지 않습니다.");
+            bindingResult
+                    .rejectValue(
+                            "password_2",
+                            "passwordInCorrect",
+                            "2개의 패스워드가 일치하지 않습니다."
+                    );
             return "login/signUp_form";
         }
 
-        memberService.create(memberCreateForm.getUsername(),
-                memberCreateForm.getEmail(), memberCreateForm.getPassword_1());
+        try {
+            memberService.create(memberCreateForm.getUsername(), memberCreateForm.getEmail(), memberCreateForm.getPassword_1());
+        }catch(DataIntegrityViolationException e) {
+            e.printStackTrace();
+            bindingResult.reject(
+                    "signupFailed",
+                    "이미 등록된 사용자입니다.");
+            log.info("등록된 회원입니다.");
+            return "login/signUp_form";
+        }catch(Exception e) {
+            e.printStackTrace();
+            bindingResult.reject(
+                    "signupFailed", e.getMessage());
+            log.info("로그인 실패 ㅠ");
+            return "login/signUp_form";
+        }
+        log.info("회원가입 성공!!");
+        return "login/login_form";
+    }
 
-        return "redirect:/";
+    @GetMapping("/login")
+    public String login() {
+        log.info("로그인 페이지 접근!");
+        return "login/login_form";
     }
 }

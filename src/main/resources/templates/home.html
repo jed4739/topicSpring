@@ -1,0 +1,8 @@
+<html layout:decorate="~{/layout}"
+      lang="ko"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.w3.org/1999/xhtml">
+<div layout:fragment="content" class="container">
+  <span sec:authorize="hasRole('ROLE_ADMIN')">난 어드민이다!<br></span>
+  홈이에요!
+</div>
+</html>

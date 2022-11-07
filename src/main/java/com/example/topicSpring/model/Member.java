@@ -3,7 +3,7 @@ package com.example.topicSpring.model;
 import lombok.*;
 import javax.persistence.*;
 
-@NoArgsConstructor
+
 @Getter @Setter
 @Entity
 @Table(name = "member")
@@ -21,6 +21,5 @@ public class Member extends BaseTime {
 
     @Column(name = "password")
     private String password;
-
 }
 
