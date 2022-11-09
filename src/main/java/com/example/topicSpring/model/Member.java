@@ -8,10 +8,11 @@ import javax.persistence.*;
 @Entity
 @Table(name = "member")
 public class Member {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
 
     @Column(nullable = false, name = "username", unique = true)
     private String username;
@@ -21,5 +22,6 @@ public class Member {
 
     @Column(name = "password")
     private String password;
+
 }
 

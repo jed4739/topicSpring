@@ -1,19 +1,14 @@
 package com.example.topicSpring.constroller;
 
-import com.example.topicSpring.model.MemberCreateForm;
+import com.example.topicSpring.model.MemberDto;
 import com.example.topicSpring.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
-import java.security.Principal;
 
 @Slf4j
 @Controller
@@ -24,17 +19,23 @@ public class MemberController {
     private final MemberService memberService;
 
     @GetMapping("/signup")
-    public String signup(@ModelAttribute("memberCreateForm") MemberCreateForm memberCreateForm) {
+    public String signup(@ModelAttribute("memberCreateForm") MemberDto memberDto) {
         return "login/signUp_form";
     }
 
+    /*
+    * 회원가입 메소드
+    * DTO에서 값을 받음.
+    * Error구현
+    * */
     @PostMapping("/signup")
-    public String signup(@Valid @ModelAttribute("memberCreateForm")  MemberCreateForm memberCreateForm, BindingResult bindingResult) {
+    public String signup(@Valid @ModelAttribute("memberCreateForm") MemberDto memberDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("MemberCreateForm",memberDto);
             return "login/signUp_form";
         }
 
-        if (!memberCreateForm.getPassword_1().equals(memberCreateForm.getPassword_2())) {
+        if (!memberDto.getPassword_1().equals(memberDto.getPassword_2())) {
             bindingResult
                     .rejectValue(
                             "password_2",
@@ -43,23 +44,12 @@ public class MemberController {
                     );
             return "login/signUp_form";
         }
-
-        try {
-            memberService.create(memberCreateForm.getUsername(), memberCreateForm.getEmail(), memberCreateForm.getPassword_1());
-        }catch(DataIntegrityViolationException e) {
-            e.printStackTrace();
-            bindingResult.reject(
-                    "signupFailed",
-                    "이미 등록된 사용자입니다.");
-            log.info("등록된 회원입니다.");
-            return "login/signUp_form";
-        }catch(Exception e) {
-            e.printStackTrace();
-            bindingResult.reject(
-                    "signupFailed", e.getMessage());
-            log.info("로그인 실패 ㅠ");
-            return "login/signUp_form";
-        }
+        /*
+        * checkUsernameDuplication -> username
+        * checkEmailDuplication -> email
+        * bool 타입의 서비스 메소드들 미사용 중
+        * */
+        memberService.create(memberDto.getUsername(), memberDto.getEmail(), memberDto.getPassword_1());
         log.info("회원가입 성공!!");
         return "login/login_form";
     }
@@ -71,8 +61,9 @@ public class MemberController {
     }
 
     @GetMapping("/mypage")
-    public String mypage(Principal principal) {
+    public String mypage() {
         log.info("마이 페이지");
         return "my_page";
     }
+
 }

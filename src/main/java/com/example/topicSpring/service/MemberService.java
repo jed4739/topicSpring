@@ -24,4 +24,14 @@ public class MemberService {
         this.memberRepository.save(member);
         return member;
     }
+
+    public boolean checkUsernameDuplication(String username) {
+        boolean usernameDuplicate = memberRepository.existsByUsername(username);
+        return usernameDuplicate;
+    }
+    public boolean checkEmailDuplication(String email) {
+        boolean emailDuplicate = memberRepository.existsByEmail(email);
+        return emailDuplicate;
+    }
+
 }
