@@ -1,9 +1,10 @@
 package com.example.topicSpring.constroller;
 
-import com.example.topicSpring.model.MemberDto;
+import com.example.topicSpring.domain.MemberDto;
 import com.example.topicSpring.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -44,13 +45,22 @@ public class MemberController {
                     );
             return "login/signUp_form";
         }
-        /*
-        * checkUsernameDuplication -> username
-        * checkEmailDuplication -> email
-        * bool 타입의 서비스 메소드들 미사용 중
-        * */
-        memberService.create(memberDto.getUsername(), memberDto.getEmail(), memberDto.getPassword_1());
-        log.info("회원가입 성공!!");
+        try {
+            memberService.create(memberDto.getUsername(), memberDto.getEmail(), memberDto.getPassword_1());
+        }catch(DataIntegrityViolationException e) {
+            e.printStackTrace();
+            bindingResult.reject(
+                    "signupFailed",
+                    "이미 등록된 사용자입니다.");
+            log.info("등록된 회원입니다.");
+            return "login/signUp_form";
+        }catch(Exception e) {
+            e.printStackTrace();
+            bindingResult.reject(
+                    "signupFailed", e.getMessage());
+            log.info("로그인 실패 ㅠ");
+            return "login/signUp_form";
+        }
         return "login/login_form";
     }
 

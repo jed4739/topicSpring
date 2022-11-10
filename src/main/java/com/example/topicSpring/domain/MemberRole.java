@@ -1,4 +1,4 @@
-package com.example.topicSpring.model;
+package com.example.topicSpring.domain;
 
 import lombok.Getter;
 

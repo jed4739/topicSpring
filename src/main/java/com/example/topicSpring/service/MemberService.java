@@ -1,6 +1,6 @@
 package com.example.topicSpring.service;
 
-import com.example.topicSpring.model.Member;
+import com.example.topicSpring.domain.Member;
 import com.example.topicSpring.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,15 +23,6 @@ public class MemberService {
         member.setPassword(passwordEncoder.encode(password));
         this.memberRepository.save(member);
         return member;
-    }
-
-    public boolean checkUsernameDuplication(String username) {
-        boolean usernameDuplicate = memberRepository.existsByUsername(username);
-        return usernameDuplicate;
-    }
-    public boolean checkEmailDuplication(String email) {
-        boolean emailDuplicate = memberRepository.existsByEmail(email);
-        return emailDuplicate;
     }
 
 }

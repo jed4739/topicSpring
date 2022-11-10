@@ -3,9 +3,9 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <div layout:fragment="content" class="container">
-    <h3 style="display: inline">사용자의 ID는 </h3>
-    <h3 style="display: inline" th:text="${#authentication.name}"></h3>
-    <h3 style="display: inline" >입니다.</h3>
+    <h2 style="display: inline">사용자의 ID(Name)는 </h2>
+    <h2 style="display: inline" th:text="${#authentication.name}"></h2>
+    <h2 style="display: inline" >입니다.</h2>
     <form>
         <div>
             <label>

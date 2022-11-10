@@ -1,7 +1,7 @@
 package com.example.topicSpring.service;
 
-import com.example.topicSpring.model.Member;
-import com.example.topicSpring.model.MemberRole;
+import com.example.topicSpring.domain.Member;
+import com.example.topicSpring.domain.MemberRole;
 import com.example.topicSpring.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
