@@ -24,5 +24,4 @@ public class MemberService {
         this.memberRepository.save(member);
         return member;
     }
-
 }

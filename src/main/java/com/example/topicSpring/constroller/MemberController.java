@@ -31,6 +31,7 @@ public class MemberController {
     * */
     @PostMapping("/signup")
     public String signup(@Valid @ModelAttribute("memberCreateForm") MemberDto memberDto, BindingResult bindingResult, Model model) {
+
         if (bindingResult.hasErrors()) {
             model.addAttribute("MemberCreateForm",memberDto);
             return "login/signUp_form";
@@ -45,22 +46,7 @@ public class MemberController {
                     );
             return "login/signUp_form";
         }
-        try {
             memberService.create(memberDto.getUsername(), memberDto.getEmail(), memberDto.getPassword_1());
-        }catch(DataIntegrityViolationException e) {
-            e.printStackTrace();
-            bindingResult.reject(
-                    "signupFailed",
-                    "이미 등록된 사용자입니다.");
-            log.info("등록된 회원입니다.");
-            return "login/signUp_form";
-        }catch(Exception e) {
-            e.printStackTrace();
-            bindingResult.reject(
-                    "signupFailed", e.getMessage());
-            log.info("로그인 실패 ㅠ");
-            return "login/signUp_form";
-        }
         return "login/login_form";
     }
 
