@@ -1,33 +1,38 @@
 <html layout:decorate="~{/layout}"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="ko">
 <div layout:fragment="content" class="container center" >
   <div class="my-3 border-bottom">
     <div>
       <h4>회원가입</h4>
     </div>
   </div>
-  <form th:action="@{/user/signup}" th:object="${memberCreateForm}" method="post">
-    <div th:replace="error/form_errors :: formErrorsFragment"></div>
+<!--  해당 span tag 안됨 Thyleaf Error-->
+<!--  fields hasError 문제-->
+  <form th:action="@{/user/signup}" th:object="${memberCreateForm}" th:if="${#fields.hasAnyErrors()}" method="post">
     <div>
       <label th:for="username" class="form-label">사용자 ID
-      <input type="text" th:field="*{username}" class="form-control">
+        <input type="text" th:field="*{username}" class="form-control">
+        <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" />
       </label>
     </div>
     <div>
       <label th:for="password_1" class="form-label">비밀번호
       <input type="password" th:field="*{password_1}" class="form-control">
+        <span th:if="${#fields.hasErrors('password_1')}" th:errors="*{password_1}" />
       </label>
     </div>
     <div>
       <label th:for="password_2" class="form-label">비밀번호 확인
       <input type="password" th:field="*{password_2}" class="form-control">
+        <span th:if="${#fields.hasErrors('password_2')}" th:errors="*{password_2}" />
       </label>
     </div>
     <div>
       <label th:for="email" class="form-label">이메일
       <input type="email" th:field="*{email}" class="form-control">
+        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" />
       </label>
     </div>
     <button type="submit" class="btn btn-primary">회원가입</button>
