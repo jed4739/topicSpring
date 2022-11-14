@@ -3,9 +3,7 @@ create table member
     id bigint(20) unsigned auto_increment primary key,
     email varchar(255) not null,
     password varchar(255) not null,
-    username varchar(255) not null,
-    unique (email),
-    unique (username)
+    username varchar(255) not null
 );
 
 create table board
