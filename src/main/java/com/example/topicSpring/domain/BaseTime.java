@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 /**
  * BaseTime 은 엔티티에 생성날짜를 추가해줍니다.
