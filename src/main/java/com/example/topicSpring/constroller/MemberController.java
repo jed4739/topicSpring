@@ -32,10 +32,9 @@ public class MemberController {
     * Error구현
     * */
     @PostMapping("/signup")
-    public String signup(@Valid MemberSaveForm memberSaveForm, BindingResult bindingResult) throws Exception{
+    public String signup(@Valid MemberSaveForm memberSaveForm, BindingResult bindingResult) throws Exception {
 
         if (bindingResult.hasErrors()) {
-            log.info("회원가입 중 에러", bindingResult);
             return "login/signUp_form";
         }
         /*

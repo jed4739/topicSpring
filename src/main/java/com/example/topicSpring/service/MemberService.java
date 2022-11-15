@@ -21,6 +21,7 @@ public class MemberService {
                 .email(memberDTO.getEmail())
                 .build();
         // 중복 체크
+        
 
 
         // 모두 완료후 회원가입
