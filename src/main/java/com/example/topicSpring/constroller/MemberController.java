@@ -1,10 +1,10 @@
 package com.example.topicSpring.constroller;
 
-import com.example.topicSpring.domain.MemberDto;
+import com.example.topicSpring.domain.dto.MemberDTO;
+import com.example.topicSpring.domain.dto.MemberSaveForm;
 import com.example.topicSpring.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,7 +20,9 @@ public class MemberController {
     private final MemberService memberService;
 
     @GetMapping("/signup")
-    public String signup(@ModelAttribute("memberCreateForm") MemberDto memberDto) {
+    public String signup(Model model) {
+        model.addAttribute("memberCreateForm", new MemberSaveForm());
+        log.info("회원가입 페이지로 이동");
         return "login/signUp_form";
     }
 
@@ -30,30 +32,34 @@ public class MemberController {
     * Error구현
     * */
     @PostMapping("/signup")
-    public String signup(@Valid @ModelAttribute("memberCreateForm") MemberDto memberDto, BindingResult bindingResult, Model model) {
+    public String signup(@Valid MemberSaveForm memberSaveForm, BindingResult bindingResult) throws Exception{
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("MemberCreateForm",memberDto);
+            log.info("회원가입 중 에러", bindingResult);
             return "login/signUp_form";
         }
+        /*
+        * DTO 생성자에 VO 세팅
+        * */
+        MemberDTO memberDTO = new MemberDTO(
+                memberSaveForm.getId(),
+                memberSaveForm.getUsername(),
+                memberSaveForm.getPassword(),
+                memberSaveForm.getEmail()
+        );
+        log.info("MemberDTO ={}", memberDTO);
 
-        if (!memberDto.getPassword_1().equals(memberDto.getPassword_2())) {
-            bindingResult
-                    .rejectValue(
-                            "password_2",
-                            "passwordInCorrect",
-                            "2개의 패스워드가 일치하지 않습니다."
-                    );
-            return "login/signUp_form";
-        }
-            memberService.create(memberDto.getUsername(), memberDto.getEmail(), memberDto.getPassword_1());
-        return "login/login_form";
+        /*
+         * 3. 회원 가입 정보 DTO를 Controller -> Service 전달
+         */
+        memberService.InsertMember(memberDTO);
+        return "login/signIn_form";
     }
 
     @GetMapping("/login")
     public String login() {
         log.info("로그인 페이지 접근!");
-        return "login/login_form";
+        return "login/signIn_form";
     }
 
     @GetMapping("/mypage")

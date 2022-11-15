@@ -51,10 +51,9 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/**")
+                .antMatchers("/user/login","/user/signup")
                 .permitAll()
-                .antMatchers("/user/mypage")
-                .hasRole("USER")
+                .antMatchers("/user/mypage").hasRole("USER")
                 .and()
                 .formLogin()
                 .loginPage("/user/login")
