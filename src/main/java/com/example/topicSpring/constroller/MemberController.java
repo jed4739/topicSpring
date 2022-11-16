@@ -32,9 +32,10 @@ public class MemberController {
     * Error구현
     * */
     @PostMapping("/signup")
-    public String signup(@Valid MemberSaveForm memberSaveForm, BindingResult bindingResult) throws Exception {
+    public String signup(@Valid @ModelAttribute MemberSaveForm memberSaveForm, BindingResult bindingResult) throws Exception {
 
         if (bindingResult.hasErrors()) {
+            log.info("SignUp error");
             return "login/signUp_form";
         }
         /*
@@ -43,15 +44,14 @@ public class MemberController {
         MemberDTO memberDTO = new MemberDTO(
                 memberSaveForm.getId(),
                 memberSaveForm.getUsername(),
-                memberSaveForm.getPassword(),
-                memberSaveForm.getEmail()
+                memberSaveForm.getEmail(),
+                memberSaveForm.getPassword()
         );
         log.info("MemberDTO ={}", memberDTO);
-
         /*
          * 3. 회원 가입 정보 DTO를 Controller -> Service 전달
          */
-        memberService.InsertMember(memberDTO);
+        memberService.save(memberDTO);
         return "login/signIn_form";
     }
 
