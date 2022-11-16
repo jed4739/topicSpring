@@ -8,10 +8,8 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "member")
 public class Member extends BaseTime{
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
     @Column(nullable = false)
@@ -22,6 +20,7 @@ public class Member extends BaseTime{
 
     @Column(nullable = false)
     private String password;
+
     @Builder
     public Member(Long id, String username, String email, String password) {
         this.id = id;
