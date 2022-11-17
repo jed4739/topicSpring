@@ -1,17 +1,17 @@
 package com.example.topicSpring.domain.dto;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter @Setter
+@NoArgsConstructor
 public class MemberDTO {
-    private Long id;
     private String username;
     private String email;
     private String password;
 
-    public MemberDTO(Long id, String username, String email, String password) {
-        this.id = id;
+    public MemberDTO(String username, String email, String password) {
         this.username = username;
         this.password = password;
         this.email = email;
