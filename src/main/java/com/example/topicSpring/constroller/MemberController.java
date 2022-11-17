@@ -42,7 +42,6 @@ public class MemberController {
         * DTO 생성자에 VO 세팅
         * */
         MemberDTO memberDTO = new MemberDTO(
-                memberSaveForm.getId(),
                 memberSaveForm.getUsername(),
                 memberSaveForm.getEmail(),
                 memberSaveForm.getPassword()
