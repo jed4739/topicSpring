@@ -1,10 +1,9 @@
 package com.example.topicSpring.domain;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -18,6 +17,16 @@ public class Board extends BaseTime {
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
+
+    @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
+    private List<Comment> commentList;
+
+    @Builder
+    public Board(Long id, String title, String content, List commentList) {
+        this.title = title;
+        this.content = content;
+        this.commentList = commentList;
+    }
 }

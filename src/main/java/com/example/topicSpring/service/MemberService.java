@@ -16,7 +16,6 @@ public class MemberService {
 
     public void save(MemberDTO memberDTO) throws Exception {
         Member member = Member.builder()
-                .id(memberDTO.getId())
                 .username(memberDTO.getUsername())
                 .password(passwordEncoder.encode(memberDTO.getPassword()))
                 .email(memberDTO.getEmail())
