@@ -51,7 +51,7 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .antMatchers("/user/login","/user/signup")
                 .permitAll()
-                .antMatchers("/**").hasRole("USER")
+//                .antMatchers("/**").hasRole("USER")
                 .and()
                 .formLogin()
                 .loginPage("/user/login")
