@@ -4,6 +4,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:sec="http://www.thymeleaf.org">
 <div layout:fragment="content" class="container">
-  <h2 style="display: inline" sec:authentication="name">님 환영합니다.</h2>
+  <h2 style="display: inline" sec:authorize="isAuthenticated()" sec:authentication="name">님 환영합니다.</h2>
+  <table th:replace="board_list :: tableFragment"></table>
 </div>
 </html>
