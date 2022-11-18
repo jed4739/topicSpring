@@ -25,6 +25,7 @@ public class Board extends BaseTime {
 
     @Builder
     public Board(Long id, String title, String content, List commentList) {
+        this.id = id;
         this.title = title;
         this.content = content;
         this.commentList = commentList;

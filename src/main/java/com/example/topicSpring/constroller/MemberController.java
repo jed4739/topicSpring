@@ -1,7 +1,7 @@
 package com.example.topicSpring.constroller;
 
-import com.example.topicSpring.domain.dto.MemberDTO;
-import com.example.topicSpring.domain.dto.MemberSaveForm;
+import com.example.topicSpring.domain.DTO;
+import com.example.topicSpring.domain.MemberSaveForm;
 import com.example.topicSpring.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -41,7 +41,8 @@ public class MemberController {
         /*
         * DTO 생성자에 VO 세팅
         * */
-        MemberDTO memberDTO = new MemberDTO(
+        DTO memberDTO = new DTO(
+                memberSaveForm.getId(),
                 memberSaveForm.getUsername(),
                 memberSaveForm.getEmail(),
                 memberSaveForm.getPassword()

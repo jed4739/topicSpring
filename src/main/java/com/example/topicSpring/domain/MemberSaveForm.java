@@ -1,4 +1,4 @@
-package com.example.topicSpring.domain.dto;
+package com.example.topicSpring.domain;
 
 
 import lombok.Getter;
