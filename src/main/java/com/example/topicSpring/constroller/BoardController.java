@@ -17,13 +17,16 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/board")
 public class BoardController {
+
     private final BoardService boardService;
+
     @GetMapping("/list")
     public String home(Model model) {
         List<Board> boardList = this.boardService.getList();
         model.addAttribute("boardList", boardList);
         return "board_list";
     }
+
     /*
     * 해당 URL 은 Board 테이블의 pk를 쿼리로 나타냄
     * */
@@ -33,14 +36,17 @@ public class BoardController {
         model.addAttribute("board", board);
         return "board_detail";
     }
+
     @GetMapping("/")
     public String root() {
         return "redirect:/board/list";
     }
+
     @GetMapping("/create")
     public String boardCreate(BoardForm boardForm) {
         return "board_form";
     }
+
     /*
     * RequestParam 으로 템플릿에서 바로 값 전달 -> DTO를 통해서 값을 전달
     * BindingResult 로 Error 처리
