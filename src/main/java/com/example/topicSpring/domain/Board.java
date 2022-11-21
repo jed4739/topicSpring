@@ -6,8 +6,9 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter @Setter
+@NoArgsConstructor
+// (access = AccessLevel.PROTECTED)
 public class Board extends BaseTime {
 
     @Id
@@ -23,11 +24,11 @@ public class Board extends BaseTime {
     @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
     private List<Comment> commentList;
 
-    @Builder
-    public Board(Long id, String title, String content, List commentList) {
-        this.id = id;
-        this.title = title;
-        this.content = content;
-        this.commentList = commentList;
-    }
+//    @Builder
+//    public Board(Long id, String title, String content, List commentList) {
+//        this.id = id;
+//        this.title = title;
+//        this.content = content;
+//        this.commentList = commentList;
+//    }
 }

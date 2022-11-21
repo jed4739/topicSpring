@@ -49,6 +49,9 @@ dependencies {
 
 	// developmentOnly
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+	// bootstrap
+	implementation 'org.webjars:bootstrap:5.2.2'
 }
 
 tasks.named('test') {

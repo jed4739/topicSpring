@@ -38,4 +38,11 @@ public class BoardService {
             throw new DataNotFoundException("board not found");
         }
     }
+
+    public void create(String title, String content) {
+        Board board = new Board();
+        board.setTitle(title);
+        board.setContent(content);
+        this.boardRepository.save(board);
+    }
 }

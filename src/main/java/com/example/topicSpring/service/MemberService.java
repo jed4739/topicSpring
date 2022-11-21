@@ -1,7 +1,7 @@
 package com.example.topicSpring.service;
 
 import com.example.topicSpring.domain.Member;
-import com.example.topicSpring.domain.DTO;
+import com.example.topicSpring.domain.dto.DTO;
 import com.example.topicSpring.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;

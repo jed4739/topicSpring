@@ -1,7 +1,7 @@
 package com.example.topicSpring.constroller;
 
-import com.example.topicSpring.domain.DTO;
-import com.example.topicSpring.domain.MemberSaveForm;
+import com.example.topicSpring.domain.dto.DTO;
+import com.example.topicSpring.domain.dto.MemberSaveForm;
 import com.example.topicSpring.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
