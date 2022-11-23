@@ -3,7 +3,6 @@ package com.example.topicSpring.domain;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Getter @Setter
@@ -21,14 +20,10 @@ public class Board extends BaseTime {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
 
-    @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
-    private List<Comment> commentList;
-
 //    @Builder
-//    public Board(Long id, String title, String content, List commentList) {
+//    public Board(Long id, String title, String content) {
 //        this.id = id;
 //        this.title = title;
 //        this.content = content;
-//        this.commentList = commentList;
 //    }
 }

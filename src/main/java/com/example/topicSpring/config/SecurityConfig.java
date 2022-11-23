@@ -55,11 +55,11 @@ public class SecurityConfig {
                 .and()
                 .formLogin()
                 .loginPage("/user/login")
-                .defaultSuccessUrl("/")
+                .defaultSuccessUrl("/board/list")
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
-                .logoutSuccessUrl("/")
+                .logoutSuccessUrl("/board/list")
                 .invalidateHttpSession(true);
         return http.build();
     }
