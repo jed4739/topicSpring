@@ -4,13 +4,13 @@ import com.example.topicSpring.domain.Board;
 import com.example.topicSpring.domain.dto.BoardForm;
 import com.example.topicSpring.service.BoardService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -19,16 +19,16 @@ public class BoardController {
 
     private final BoardService boardService;
 
-    @GetMapping("/list")
-    public String home(Model model) {
-        List<Board> boardList = this.boardService.getList();
-        model.addAttribute("boardList", boardList);
+    @RequestMapping("/list")
+    public String home(Model model, @RequestParam(value = "page", defaultValue = "0") int page) {
+        Page<Board> paging = this.boardService.getList(page);
+        model.addAttribute("paging", paging);
         return "board_list";
     }
     /*
     * 해당 URL 은 Board 테이블의 pk를 쿼리로 나타냄
     * */
-    @GetMapping("/detail/{id}")
+    @RequestMapping("/detail/{id}")
     public String detail(Model model, @PathVariable("id") Long id) {
         Board board = this.boardService.getBoard(id);
         model.addAttribute("board", board);

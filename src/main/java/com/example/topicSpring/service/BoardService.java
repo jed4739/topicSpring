@@ -4,8 +4,14 @@ import com.example.topicSpring.domain.Board;
 import com.example.topicSpring.error.DataNotFoundException;
 import com.example.topicSpring.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,12 +19,16 @@ import java.util.Optional;
  * Board Service class
  * 해당 서비스를 유지할 지, 혹은 member 테이블의 pk의 의존하는 형식으로 할지 정해야함.
  * */
-@RequiredArgsConstructor
 @Service
+@Transactional
+@RequiredArgsConstructor
 public class BoardService {
     private final BoardRepository boardRepository;
-    public List<Board> getList() {
-        return this.boardRepository.findAll();
+    public Page<Board> getList(int page) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("createdDate"));
+        Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
+        return this.boardRepository.findAll(pageable);
     }
     public Board getBoard(Long id) {
         Optional<Board> board = this.boardRepository.findById(id);

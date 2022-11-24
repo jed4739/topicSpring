@@ -1,4 +1,4 @@
-package com.example.topicSpring.config;
+package com.example.topicSpring.auth;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -49,18 +49,17 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/user/login","/user/signup")
-                .permitAll()
+                .antMatchers("/user/login","/user/signup").permitAll()
 //                .antMatchers("/**").hasRole("USER")
                 .and()
-                .formLogin()
-                .loginPage("/user/login")
-                .defaultSuccessUrl("/board/list")
+                    .formLogin()
+                    .loginPage("/user/login")
+                    .defaultSuccessUrl("/board/list")
                 .and()
-                .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
-                .logoutSuccessUrl("/board/list")
-                .invalidateHttpSession(true);
+                    .logout()
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
+                    .logoutSuccessUrl("/board/list")
+                    .invalidateHttpSession(true);
         return http.build();
     }
 
