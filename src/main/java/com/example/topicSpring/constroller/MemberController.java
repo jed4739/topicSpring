@@ -1,5 +1,6 @@
 package com.example.topicSpring.constroller;
 
+import com.example.topicSpring.domain.Member;
 import com.example.topicSpring.domain.dto.DTO;
 import com.example.topicSpring.domain.dto.MemberSaveForm;
 import com.example.topicSpring.service.MemberService;
@@ -38,20 +39,12 @@ public class MemberController {
             log.info("SignUp error");
             return "login/signUp_form";
         }
-        /*
-        * DTO 생성자에 VO 세팅
-        * */
-        DTO memberDTO = new DTO(
-                memberSaveForm.getId(),
-                memberSaveForm.getUsername(),
-                memberSaveForm.getEmail(),
-                memberSaveForm.getPassword()
-        );
-        log.info("MemberDTO ={}", memberDTO);
-        /*
-         * 3. 회원 가입 정보 DTO를 Controller -> Service 전달
-         */
-        memberService.save(memberDTO);
+        Member member = new Member();
+        member.setId(memberSaveForm.getId());
+        member.setPassword(memberSaveForm.getPassword());
+        member.setEmail(memberSaveForm.getEmail());
+        member.set
+        memberService.save();
         return "login/signIn_form";
     }
 
