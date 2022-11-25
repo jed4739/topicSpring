@@ -8,22 +8,29 @@
       <h4>회원가입</h4>
     </div>
   </div>
-<!--  해당 span tag 안됨 Thyleaf Error-->
-<!--  fields hasError 문제-->
   <form th:action="@{/user/signup}" th:object="${memberCreateForm}"  method="post">
     <div>
       <label th:for="username" class="form-label">사용자 ID
-        <input type="text" th:field="*{username}" class="form-control">
+        <input type="text" th:field="*{username}" class="form-control" th:errorclass="f-error">
+        <div class="f-error" th:errors="*{username}"></div>
       </label>
     </div>
     <div>
-      <label th:for="password" class="form-label">비밀번호
-      <input type="password" th:field="*{password}" class="form-control">
+      <label th:for="password1" class="form-label">비밀번호
+        <input type="password" th:field="*{password1}" class="form-control"th:errorclass="f-error">
+        <div class="f-error" th:errors="*{password1}"></div>
+      </label>
+    </div>
+    <div>
+      <label th:for="password2" class="form-label">비밀번호 체크
+        <input type="password" th:field="*{password2}" class="form-control" th:errorclass="f-error">
+        <div class="f-error" th:errors="*{password2}"></div>
       </label>
     </div>
     <div>
       <label th:for="email" class="form-label">이메일
-      <input type="email" th:field="*{email}" class="form-control">
+        <input type="email" th:field="*{email}" class="form-control" th:errorclass="f-error">
+        <div class="f-error" th:errors="*{email}"></div>
       </label>
     </div>
     <button type="submit" class="btn btn-primary">회원가입</button>

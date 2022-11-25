@@ -1,6 +1,7 @@
 <html layout:decorate="~{layout}"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <div layout:fragment="content" class="container my-3">
     <table class="table table-hover text-center">
         <thead class="table-dark">
@@ -17,7 +18,7 @@
             <td style="text-align: left">
                 <a th:href="@{|/board/detail/${board.id}|}" th:text="${board.title}"></a>
             </td>
-            <td></td>
+            <td th:if="${board.author != null}" th:text="${board.author.username}"></td>
             <td th:text="${#temporals.format(board.createdDate, 'yyyy-MM-dd')}"></td>
         </tr>
         </tbody>
@@ -41,6 +42,6 @@
             </li>
         </ul>
     </div>
-    <a th:href="@{/board/create}" class="btn btn-primary">글 등록하기</a>
+    <a th:href="@{/board/create}" class="btn btn-primary" sec:authorize="isAuthenticated()">글 등록하기</a>
 </div>
 </html>

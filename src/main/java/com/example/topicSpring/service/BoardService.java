@@ -1,6 +1,7 @@
 package com.example.topicSpring.service;
 
 import com.example.topicSpring.domain.Board;
+import com.example.topicSpring.domain.Member;
 import com.example.topicSpring.error.DataNotFoundException;
 import com.example.topicSpring.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
@@ -38,10 +39,20 @@ public class BoardService {
             throw new DataNotFoundException("Board not found");
         }
     }
-    public void create(String title, String content) {
+    public void create(String title, String content, Member member) {
         Board board = new Board();
         board.setTitle(title);
         board.setContent(content);
+        board.setAuthor(member);
         this.boardRepository.save(board);
+    }
+    public void modify(Board board, String title, String content) {
+        board.setTitle(title);
+        board.setContent(content);
+        this.boardRepository.save(board);
+    }
+
+    public void delete(Board board) {
+        this.boardRepository.delete(board);
     }
 }

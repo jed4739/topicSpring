@@ -1,43 +1,62 @@
 package com.example.topicSpring.auth;
 
+import com.example.topicSpring.domain.Member;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
+@Data
 public class PrincipalDetail implements UserDetails {
+
+    private Member member;
+
+    public PrincipalDetail(Member member) {
+        this.member = member;
+    }
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        Collection<GrantedAuthority> collection = new ArrayList<>();
+        collection.add(new GrantedAuthority() {
+            @Override
+            public String getAuthority() {
+                return member.getRole();
+            }
+        });
+        return collection;
     }
 
     @Override
     public String getPassword() {
-        return null;
+        return member.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return member.getUsername();
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }

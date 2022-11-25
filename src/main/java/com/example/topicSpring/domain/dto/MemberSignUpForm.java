@@ -9,7 +9,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 @Getter @Setter
-public class MemberSaveForm {
+public class MemberSignUpForm {
 
     private Long id;
 
@@ -19,7 +19,10 @@ public class MemberSaveForm {
 
     @NotBlank(message = "비밀번호는 필수 항목 입니다.")
     @Pattern(regexp = "^[A-Za-z0-9]{4,20}$", message = "비밀번호는 영어와 숫자만 사용하여 4~20자리여야 합니다.")
-    private String password;
+    private String password1;
+
+    @NotBlank(message = "비밀번호 체크는 필수 항목 입니다.")
+    private String password2;
 
     @Email
     @NotBlank(message = "이메일은 필수 항목 입니다.")
